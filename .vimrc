@@ -16,6 +16,8 @@ Plugin 'ap/vim-css-color' "css 顏色
 Plugin 'evgenyzinoviev/vim-vendetta' "colorscheme
 Plugin 'itchyny/lightline.vim' "statusline
 Plugin 'ervandew/supertab'
+Plugin 'L9'
+Plugin 'othree/vim-autocomplpop'
 Plugin 'tpope/vim-fugitive' "status git branch
 Plugin 'junegunn/vim-easy-align' " 自動對齊工具
 " All of your Plugins must be added before the following line
@@ -76,7 +78,7 @@ set list
 set listchars=tab:->,trail:.
 " {{{ syntax highlight格式 
 colorscheme vendetta
-set background=dark
+"set background=dark
 hi Comment term=standout cterm=bold ctermfg=0
 hi Search term=reverse ctermbg=3 ctermfg=0
 hi Folded ctermbg=black ctermfg=darkcyan
@@ -171,31 +173,3 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-" Tabular 自動排整齊 {{{
-"let mapleader=','
-"if exists(":Tabularize")
-"    nmap <Leader>a= :Tabularize /=<CR>
-"    vmap <Leader>a= :Tabularize /=<CR>
-"    nmap <Leader>a: :Tabularize /:\zs<CR>
-"    vmap <Leader>a: :Tabularize /:\zs<CR>
-"endif
-"
-"inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-"
-"function! s:align()
-"    let p = '^\s*|\s.*\s|\s*$'
-"    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-"        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-"        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-"        Tabularize/|/l1
-"        normal! 0
-"        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-"    endif
-"endfunction
-" }}}
-" 在開以php文件時，啟動autocomplete
-au FileType php call AddPHPFuncList()
-function! AddPHPFuncList()
-    set dictionary-=~/.vim/php-funclist.txt dictionary+=~/.vim/php-funclist.txt
-    set complete-=k complete+=k
-endfunction
